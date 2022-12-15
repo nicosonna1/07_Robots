@@ -28,8 +28,13 @@ int main() {
     vRobots.resize(nbreRobot);
 
     for(size_t i = 0; i < (size_t)nbreRobot; ++i){
+        Robot robot(to_string(i));
+        vRobots.push_back(robot);
 
+        cout << vRobots[i] <<endl;
     }
+
+
 
     return EXIT_SUCCESS;
 }

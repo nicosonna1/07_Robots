@@ -14,7 +14,7 @@ class Affichage {
 public:
 
     //------------------------------------------------------
-    Affichage() = Affichage(10,10);
+//    Affichage() = Affichage(10,10);
 
     //------------------------------------------------------
     Affichage (int tailleX, int tailleY);
@@ -25,6 +25,6 @@ private:
 
 };
 
-Affichage::Affichage(){
+//Affichage::Affichage(){
 
-}
+//}
