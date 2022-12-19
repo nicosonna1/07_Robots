@@ -7,27 +7,39 @@
 #include <string>
 #include "terrain.h"
 #include <iostream>
+#include <vector>
 
 class Robot{
 public:
 
     friend std::ostream& operator<< (std::ostream& os, const Robot& robot);
+    friend void detruireRobot(std::vector<Robot>& vRobots, int id);
 
     Robot();
 
-    Robot(const Terrain& terrain);
+    Robot(Terrain& terrain);
 
-    Robot(const Robot&);
+    //Constructeur de copie
+    Robot(const Robot& robot);
 
-    void deplacement(Robot& robot, const Terrain& terrain);
+    //Opérateur d'affectation
+    Robot& operator=(const Robot& robot);
+
+    //void deplacement(Robot& robot, Terrain& terrain);
 
     /**
      *
      * @param robot
      */
-    void deplacer(const Terrain& terrain);
+    void deplacer(Terrain& terrain);
 
     void eliminerRobot();
+
+
+    bool positionLibre(const Terrain& terrain);
+
+    int getId() const;
+
 
     /**
      *  Déconstructeur de la class Robot
@@ -45,5 +57,7 @@ private:
     static int nbreRobots;
     static int prochainId;
 };
+
+
 
 #endif //INC_07_ROBOTS_ROBOT_H

@@ -36,7 +36,7 @@ Robot::Robot() : id(Robot::prochainId){
 
 }
 
-Robot::Robot(const Terrain& terrain) : id(Robot::prochainId){
+Robot::Robot(Terrain& terrain) : id(Robot::prochainId){
     ++prochainId;
     ++nbreRobots;
 
@@ -50,8 +50,26 @@ Robot::Robot(const Terrain& terrain) : id(Robot::prochainId){
 
 }
 
+//Constructeur par copie
+Robot::Robot(const Robot& robot) : id(robot.id){
+    this->posX = robot.posX;
+    this->posY = robot.posY;
+}
 
-void Robot::deplacer(const Terrain& terrain){
+//Opérateur d'affectation
+Robot& Robot::operator= (const Robot& robot){
+
+    //vérifie que l'on copie pas le robot avec lui meme
+    if (this != &robot) {
+        this->posX     = robot.posX;
+        this->posY     = robot.posY;
+    }
+
+    return *this;
+}
+
+
+void Robot::deplacer(Terrain& terrain){
 
     /*
     direction = 1 → la tondeuse monte
@@ -83,16 +101,27 @@ void Robot::deplacer(const Terrain& terrain){
         //check que le déplacement est dans les limites du terrain
     }while(tmpPosX > 0 and tmpPosX < terrain.getLargeur() and tmpPosY > 0 and tmpPosY < terrain.getHauteur());
 
+    terrain.clearPosition(tmpPosX, tmpPosY);
+
+    if(terrain.estLibre(tmpPosX, tmpPosY)){
+        terrain.setPositionRobot(this->id, this->posX, this->posY);
+    }
+
+
     this->posX = tmpPosX;
     this->posY = tmpPosY;
-
-    if(!(terrain.estLibre(this->posX, this->posY))){
-
-    }
 
 
 }
 
+bool Robot::positionLibre(const Terrain& terrain){
+    if(terrain.estLibre(this->posX, this->posY))
+        return true;
+    else
+        return false;
+}
+
+int Robot::getId() const {return this->id;}
 
 
 Robot::~Robot(){

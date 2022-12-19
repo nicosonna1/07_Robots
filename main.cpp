@@ -8,13 +8,13 @@
 #include "annex.h" //pour l'affichage
 #include "robot.h"
 #include "terrain.h"
+#include <random>
 
 using namespace std;
 
-
+bool trouverRobot{};
 
 int main() {
-    cout << "Hello, World!" << std::endl;
 
     const int MIN_LARGEUR = 10,
                 MAX_LARGEUR = 1000,
@@ -31,8 +31,33 @@ int main() {
 
     vector<Robot> vRobots(nbreRobot, Robot(terrain));
 
-    shuffle(vRobots.begin(), vRobots.end())
-    random_shuffle(vRobots.begin(), vRobots.end());
+    //auto rng = default_random_engine {};
+
+    vector<Robot>::iterator it;
+    int id;
+    int it;
+    do{
+        shuffle(vRobots.begin(), vRobots.end(),default_random_engine());
+
+        for(size_t i = 0; i < vRobots.size(); ++i){
+            vRobots[i].deplacer(terrain);
+
+            if(vRobots[i].positionLibre(terrain)){
+                id =;
+                it = remove_if(vRobots.begin(), vRobots.end(), )
+
+            }
+
+
+
+        }
+
+
+
+    } while (vRobots.size() == 1);
+
+
+    //random_shuffle(vRobots.begin(), vRobots.end());
 
 
     /*

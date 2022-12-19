@@ -13,7 +13,9 @@ public:
     int getHauteur() const;
     void setPositionRobot(char id,int x,int y);
     bool estLibre(int x, int y) const;
-
+    void afficheTerrain() const;
+    void clearPosition(int x,int y);
+    int getRobotId(int x, int y);
     //void setTaille(const int x, const int y);
 
 private:
