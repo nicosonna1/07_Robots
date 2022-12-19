@@ -25,10 +25,10 @@ Terrain::Terrain(int largeur, int longueur) {
 
 
 }
-Terrain::getLargeur() return Terrain::largeur;
-Terrain::gethauteur() return longueur;
+int Terrain::getLargeur() const {return this->largeur;}
+int Terrain::getHauteur() const {return this->hauteur;}
 
-Terrain::setPositionRobot(char id,int x,int y){
+void Terrain::setPositionRobot(char id,int x,int y){
     terrain[x][y]=id;
 }
 

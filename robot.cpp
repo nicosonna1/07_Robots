@@ -36,13 +36,13 @@ Robot::Robot() : id(Robot::prochainId){
 
 }
 
-Robot::Robot(Terrain& terrain) : id(Robot::prochainId){
+Robot::Robot(const Terrain& terrain) : id(Robot::prochainId){
     ++prochainId;
     ++nbreRobots;
 
     do{
-        this->posX = nbreAleatoire(1, terrain.getLargeur() - 1);
-        this->posY = nbreAleatoire(1, terrain.getHauteur() - 1);
+        this->posX = nbrAleatoire(1, terrain.getLargeur() - 1);
+        this->posY = nbrAleatoire(1, terrain.getHauteur() - 1);
 
     }while(terrain.estLibre(posX, posY));
 

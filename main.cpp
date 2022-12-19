@@ -33,6 +33,8 @@ int main() {
 
     shuffle(vRobots.begin(), vRobots.end())
     random_shuffle(vRobots.begin(), vRobots.end());
+
+
     /*
     vRobots.resize(nbreRobot)
 

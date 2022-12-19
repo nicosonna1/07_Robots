@@ -8,9 +8,9 @@
 
 class Terrain {
 public:
-    Terrain(int largeur,int longueur);
-    int getLargeur(int x, int y);
-    int getHauteur(int x, int y);
+    Terrain(int largeur,int hauteur);
+    int getLargeur() const;
+    int getHauteur() const;
     void setPositionRobot(char id,int x,int y);
     bool estLibre(int x, int y) const;
 
@@ -21,7 +21,7 @@ private:
     using vTerrain = std::vector<Ligne>;
     static vTerrain terrain;
     int largeur,
-        longueur;
+        hauteur;
 };
 
 #endif //INC_07_ROBOTS_TERRAIN_H
