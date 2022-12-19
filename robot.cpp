@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//déclaration des deux variables static à 0
 int Robot::nbreRobots = 0;
 int Robot::prochainId = 0;
 
@@ -22,36 +23,42 @@ int nbrAleatoire(int min, int max)
 }
 
 ostream& operator <<(ostream& os, const Robot& robot) {
+    // affichage id (X,Y)
     return os << robot.id << "(" << robot.posX << "," << robot.posY << ")"<< endl;
 }
 
 
 
 Robot::Robot() : id(Robot::prochainId){
-
+    //Incrément le prochain Id et le nombre de robots
     ++prochainId;
     ++nbreRobots;
 
-    //posX = nbrAleatoire(largeur, longueur);
+    this->posX = 1;
+    this->posY = 1;
 
 }
 
 Robot::Robot(Terrain& terrain) : id(Robot::prochainId){
+    //Incrément le prochain Id et le nombre de robots
     ++prochainId;
     ++nbreRobots;
 
+    //positionnement aléatoire du robot dans le terrain
     do{
         this->posX = nbrAleatoire(1, terrain.getLargeur() - 1);
         this->posY = nbrAleatoire(1, terrain.getHauteur() - 1);
-
+        //vérifie que l'emplacement est libre
     }while(terrain.estLibre(posX, posY));
 
-    terrain.setPositionRobot(this->id, this->posX, this->posY);
+    //positione le robot dans le terrain
+    terrain.setPositionRobot((char)this->id, this->posX, this->posY);
 
 }
 
 //Constructeur par copie
 Robot::Robot(const Robot& robot) : id(robot.id){
+    //compie la position en x et y du robot
     this->posX = robot.posX;
     this->posY = robot.posY;
 }
@@ -61,6 +68,7 @@ Robot& Robot::operator= (const Robot& robot){
 
     //vérifie que l'on copie pas le robot avec lui meme
     if (this != &robot) {
+        //copie la position x et y du robot
         this->posX     = robot.posX;
         this->posY     = robot.posY;
     }
@@ -77,14 +85,18 @@ void Robot::deplacer(Terrain& terrain){
     direction = 3 → la tondeuse descend
     direction = 4 → la tondeuse va vers la gauche
      */
+    //constant pour le min et max du déplacement
     const int DEPLACEMENT_MIN = 1,
                 DEPLACEMENT_MAX = 4;
+
+    //choisi la direction aléatoirement
     int direction = nbrAleatoire(DEPLACEMENT_MIN,DEPLACEMENT_MAX);
 
     //stock la position du robot afin de faire le déplacement.
     int tmpPosY = this->posY;
     int tmpPosX = this->posX;
     do {
+        //positionne le robot dans l'espace
         switch (direction) {
             case 1:
                 --tmpPosY;
@@ -97,31 +109,60 @@ void Robot::deplacer(Terrain& terrain){
                 break;
             case 4:
                 --tmpPosX;
+            default:
+                return;
         }
         //check que le déplacement est dans les limites du terrain
     }while(tmpPosX > 0 and tmpPosX < terrain.getLargeur() and tmpPosY > 0 and tmpPosY < terrain.getHauteur());
 
-    terrain.clearPosition(tmpPosX, tmpPosY);
+    //supprime le robot de son positionnement actuel.
+    terrain.clearPosition(this->posX, this->posY);
 
-    if(terrain.estLibre(tmpPosX, tmpPosY)){
-        terrain.setPositionRobot(this->id, this->posX, this->posY);
-    }
-
-
+    //affecte la nouvelle position au robot
     this->posX = tmpPosX;
     this->posY = tmpPosY;
 
 
 }
 
-bool Robot::positionLibre(const Terrain& terrain){
-    if(terrain.estLibre(this->posX, this->posY))
-        return true;
-    else
-        return false;
+
+int Robot::getId() const {
+    //retourne l'id du robot
+    return this->id;
+}
+int Robot::getPosX() const{
+    //retourne la position X du robot
+    return this->posX;
+}
+int Robot::getPosY() const{
+    //retourne la position y du robot
+    return this->posY;
 }
 
-int Robot::getId() const {return this->id;}
+void detruireRobot(std::vector<Robot>& vRobots, Robot& robot, int id, Terrain& terrain){
+
+    //index de boucle
+    size_t i = 0;
+    for(vector<Robot>::iterator it = vRobots.begin(); it != vRobots.end(); ++it){
+        //vérifie si c'est le robot avec l'id du robot à détruire
+        if(vRobots[i].getId() == id){
+            //Supprime le robot détruit de l'emplacement sur le terrain
+            terrain.clearPosition(vRobots[i].posX,vRobots[i].posY);
+            //Déconstruit le robot
+            vRobots[i].~Robot();
+            //supprime le robot dans le vecteur
+            vRobots.erase(it);
+
+            //Déplace le nouveau robot à l'emplacement du robot détruit.
+            terrain.setPositionRobot((char)robot.id, robot.posX, robot.posY);
+
+
+        }
+        //incrément l'index de boucle
+        ++i;
+    }
+
+}
 
 
 Robot::~Robot(){

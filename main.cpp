@@ -1,9 +1,6 @@
 #include <cstdlib>   // EXIT_SUCCESS
-#include <iostream>  // cout et cin
-#include <limits>    // numeric_limits<streamsize>
 #include <vector>
 #include <algorithm>
-#include <numeric>
 
 #include "annex.h" //pour l'affichage
 #include "robot.h"
@@ -12,10 +9,9 @@
 
 using namespace std;
 
-bool trouverRobot{};
-
 int main() {
 
+    //constante pour les minmums et les maximums lors de la saisie
     const int MIN_LARGEUR = 10,
                 MAX_LARGEUR = 1000,
                 MIN_HAUTEUR = 10,
@@ -23,52 +19,46 @@ int main() {
                 MIN_ROBOTS = 2,
                 MAX_ROBOTS = 10;
 
+    //saisie des différentes valeurs par l'utilisateur
     int largeur = saisie("largeur", MIN_LARGEUR, MAX_LARGEUR);
     int hauteur = saisie("hauteur",MIN_HAUTEUR, MAX_HAUTEUR);
     int nbreRobot = saisie("nbre object",MIN_ROBOTS, MAX_ROBOTS);
 
+    //création du terrain
     Terrain terrain(largeur,hauteur);
 
-    vector<Robot> vRobots(nbreRobot, Robot(terrain));
+    //création d'un vecteur de robots
+    vector<Robot> vRobots((size_t)nbreRobot, Robot(terrain));
 
-    //auto rng = default_random_engine {};
 
-    vector<Robot>::iterator it;
+
+    // id du robot à supprimer
     int id;
-    int it;
     do{
+        //tri aléatoire des robots dans le vecteur
         shuffle(vRobots.begin(), vRobots.end(),default_random_engine());
 
         for(size_t i = 0; i < vRobots.size(); ++i){
+            //déplace le robot
             vRobots[i].deplacer(terrain);
 
-            if(vRobots[i].positionLibre(terrain)){
-                id =;
-                it = remove_if(vRobots.begin(), vRobots.end(), )
-
+            //si l'emplacement n'est pas libre on détruit l'ancien robot
+            if(!(terrain.estLibre(vRobots[i].getPosX(), vRobots[i].getPosY())))
+            {
+                //le robot qui est déplacé n'est pas encore affiché
+                //c'est donc le robot qui était avant à cet emplacement qui est retourné
+                id = terrain.getRobotId(vRobots[i].getPosX(), vRobots[i].getPosY());
+                //détruire le robot à la nouvelle position de vRobots[i]
+                detruireRobot(vRobots, vRobots[i], id, terrain);
             }
 
-
-
+            //affichage du robot à son nouvel emplacement
+            terrain.setPositionRobot((char)vRobots[i].getId(), vRobots[i].getPosX(), vRobots[i].getPosY());
         }
+        //on s'arrête dès qu'il reste 1 robot
+    } while (vRobots.size() != 1);
 
 
-
-    } while (vRobots.size() == 1);
-
-
-    //random_shuffle(vRobots.begin(), vRobots.end());
-
-
-    /*
-    vRobots.resize(nbreRobot)
-
-    for(size_t i = 0; i < (size_t)nbreRobot; ++i){
-        Robot robot(to_string(i));
-        vRobots.push_back(robot);
-
-        cout << vRobots[i] <<endl;
-    }*/
 
 
 
