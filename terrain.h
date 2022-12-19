@@ -8,9 +8,18 @@
 
 class Terrain {
 public:
+    Terrain(int largeur,int longueur);
+    int getLargeur(int x, int y);
+    int getHauteur(int x, int y);
+    void setPositionRobot(char id,int x,int y);
+    bool estLibre(int x, int y) const;
+
     //void setTaille(const int x, const int y);
 
 private:
+    using Ligne = std::vector<char>;
+    using vTerrain = std::vector<Ligne>;
+    static vTerrain terrain;
     int largeur,
         longueur;
 };

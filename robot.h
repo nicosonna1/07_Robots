@@ -10,24 +10,40 @@
 
 class Robot{
 public:
-    Robot();
 
     friend std::ostream& operator<< (std::ostream& os, const Robot& robot);
 
-    Robot(const std::string& nom);
+    Robot();
 
+    Robot(const Terrain& terrain);
 
-    void position(Robot& robot);
+    Robot(const Robot&);
 
-    void deplacer(Robot& robot);
+    void deplacement(Robot& robot, const Terrain& terrain);
+
+    /**
+     *
+     * @param robot
+     */
+    void deplacer(const Terrain& terrain);
+
+    void eliminerRobot();
+
+    /**
+     *  Déconstructeur de la class Robot
+     */
+    ~Robot();
 
 
 
 private:
-    std::string nom;
+    const int id;
 
     int posX,
         posY;
+
+    static int nbreRobots;
+    static int prochainId;
 };
 
 #endif //INC_07_ROBOTS_ROBOT_H
