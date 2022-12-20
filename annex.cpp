@@ -4,6 +4,7 @@
 
 #include <iostream>  // cout et cin
 #include <limits>    // numeric_limits<streamsize>
+#include <random>
 #include "annex.h"
 
 using namespace std;
@@ -40,4 +41,15 @@ int saisie (const std::string message, const int MIN, const int MAX){
 
     return saisie;
 
+}
+
+int nbrAleatoire(int min, int max)
+{
+    // Utilisation de static pour le générateur permettant d'éviter
+    // de le définir à chaque appel de nbrAleatoire
+    static random_device rand_dev;
+    static default_random_engine generator(rand_dev());
+    // Distribution d'un random de manière uniforme
+    uniform_int_distribution<int> distr(min, max);
+    return distr(generator) ;
 }

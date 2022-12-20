@@ -88,8 +88,9 @@ void Terrain::afficheTerrain() const{
     cout << string((size_t) this->largeur + 2, '-') << endl;
 }
 
-void Terrain::historiqueMeurtre(int idRobotKill,int idRobotTueur){
-
+void Terrain::historiqueMeurtre(int idRobotTue,int idRobotTueur){
+    robotTue[ptrRobotTue][0]=idRobotTueur;
+    robotTue[ptrRobotTue][1]=idRobotTue;
 }
 
 

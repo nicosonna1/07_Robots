@@ -9,6 +9,8 @@
 
 using namespace std;
 
+
+
 int main() {
 
     //constante pour les minmums et les maximums lors de la saisie
@@ -28,7 +30,15 @@ int main() {
     Terrain terrain(largeur,hauteur);
 
     //création d'un vecteur de robots
-    vector<Robot> vRobots((size_t)nbreRobot, Robot(terrain));
+   // vector<Robot> vRobots((size_t)nbreRobot, Robot(terrain));
+
+   vector<Robot> vRobots;
+
+   vRobots.reserve(nbreRobot);
+
+   creerRobots(vRobots, terrain,nbreRobot);
+    //vector<Robot> vRobots;
+    //vRobots.resize(nbreRobot, Robot(terrain));
 
 
 

@@ -60,12 +60,13 @@ public:
 
 
 private:
-    void historiqueMeurtre(int idRobotKill,int idRobotTueur);
+    void historiqueMeurtre(int idRobotTue,int idRobotTueur);
     using Ligne = std::vector<char>;
     using vTerrain = std::vector<Ligne>;
     vTerrain terrain;
     using RobotTue = std::vector<int>;
-    using vRobottue = std::vector<RobotTue>;
+    using vRobotTue = std::vector<RobotTue>;
+            vRobotTue robotTue;
     int largeur,
         hauteur,
         ptrRobotTue;

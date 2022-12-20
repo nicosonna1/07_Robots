@@ -4,6 +4,7 @@
 
 #include <random>
 #include "robot.h"
+#include "annex.h"
 
 using namespace std;
 
@@ -11,16 +12,7 @@ using namespace std;
 int Robot::nbreRobots = 0;
 int Robot::prochainId = 0;
 
-int nbrAleatoire(int min, int max)
-{
-    // Utilisation de static pour le générateur permettant d'éviter
-    // de le définir à chaque appel de nbrAleatoire
-    static random_device rand_dev;
-    static default_random_engine generator(rand_dev());
-    // Distribution d'un random de manière uniforme
-    uniform_int_distribution<int> distr(min, max);
-    return distr(generator) ;
-}
+
 
 ostream& operator <<(ostream& os, const Robot& robot) {
     // affichage id (X,Y)
@@ -54,6 +46,15 @@ Robot::Robot(Terrain& terrain) : id(Robot::prochainId){
     //positione le robot dans le terrain
     terrain.setPositionRobot((char)this->id, this->posX, this->posY);
 
+}
+
+Robot::Robot(int id,int posX, int posY) : id(id){
+    //Incrément le prochain Id et le nombre de robots
+    ++prochainId;
+    ++nbreRobots;
+
+    this->posX = posX;
+    this->posY = posY;
 }
 
 //Constructeur par copie

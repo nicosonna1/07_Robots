@@ -13,6 +13,8 @@ int saisie(const std::string message, const int MIN, const int MAX);
 
 void viderBuffer();
 
+int nbrAleatoire(int min, int max);
+
 
 
 

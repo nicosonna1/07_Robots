@@ -50,6 +50,8 @@ public:
      */
     Robot(Terrain& terrain);
 
+    Robot(int id, int posX, int posY);
+
     /**   Constructeur de copie
      * __________________________________________________________
      * @param robot     : robot passé en copie
