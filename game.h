@@ -11,9 +11,18 @@ class Game {
 public:
 
     friend void positionnement(int& posX, int& posY);
+    friend void creerRobot(Game game, int nbreRobot);
+    friend void positionnement(Game game, int& posX, int& posY);
+    friend void jouer(Game game);
+
 
     Game(int nbreRobots, int largeur, int hauteur);
-    bool tourJeu()
+    bool tourJeu();
+
+    int getLargeur() const;
+
+    int getHauteur() const;
+
 
 private:
     void afficheTerrain() const;

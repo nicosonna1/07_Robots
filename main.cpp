@@ -5,6 +5,7 @@
 #include "annex.h" //pour l'affichage
 #include "robot.h"
 #include "terrain.h"
+#include "game.h"
 #include <random>
 
 using namespace std;
@@ -27,47 +28,21 @@ int main() {
     int nbreRobot = saisie("nbre object",MIN_ROBOTS, MAX_ROBOTS);
 
     //création du terrain
-    Terrain terrain(largeur,hauteur);
+
 
     //création d'un vecteur de robots
    // vector<Robot> vRobots((size_t)nbreRobot, Robot(terrain));
 
-   vector<Robot> vRobots;
 
-   vRobots.reserve(nbreRobot);
 
-   creerRobots(vRobots, terrain,nbreRobot);
+
     //vector<Robot> vRobots;
     //vRobots.resize(nbreRobot, Robot(terrain));
 
 
+    Game game(nbreRobot,largeur, hauteur);
 
-    // id du robot à supprimer
-    int id;
-    do{
-        //tri aléatoire des robots dans le vecteur
-        shuffle(vRobots.begin(), vRobots.end(),default_random_engine());
 
-        for(size_t i = 0; i < vRobots.size(); ++i){
-            //déplace le robot
-            vRobots[i].deplacer(terrain);
-
-            //si l'emplacement n'est pas libre on détruit l'ancien robot
-            if(!(terrain.estLibre(vRobots[i].getPosX(), vRobots[i].getPosY())))
-            {
-                //le robot qui est déplacé n'est pas encore affiché
-                //c'est donc le robot qui était avant à cet emplacement qui est retourné
-                id = terrain.getRobotId(vRobots[i].getPosX(), vRobots[i].getPosY());
-                //détruire le robot à la nouvelle position de vRobots[i]
-                detruireRobot(vRobots, vRobots[i], id, terrain);
-            }
-
-            //affichage du robot à son nouvel emplacement
-            terrain.setPositionRobot((char)vRobots[i].getId(), vRobots[i].getPosX(), vRobots[i].getPosY());
-        }
-        terrain.afficheTerrain();
-        //on s'arrête dès qu'il reste 1 robot
-    } while (vRobots.size() != 1);
 
 
 

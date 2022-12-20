@@ -8,6 +8,7 @@
 #include "terrain.h"
 #include <iostream>
 #include <vector>
+#include "game.h"
 
 class Robot{
 public:
@@ -87,7 +88,7 @@ public:
     * @return               : -
      * @exception           : -
      */
-    void deplacer(Terrain& terrain);
+    void deplacer(Game game);
 
 
     /**   get l'id du robot
@@ -123,6 +124,9 @@ public:
     * @exception            : -
     */
     ~Robot();
+
+    Robot(int posX, int posY);
+    bool operator() (int posX, int posY)
 
 
 

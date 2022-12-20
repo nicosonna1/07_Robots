@@ -6,6 +6,7 @@
 #include "robot.h"
 #include "annex.h"
 
+
 using namespace std;
 
 //déclaration des deux variables static à 0
@@ -58,7 +59,7 @@ Robot::Robot(int id,int posX, int posY) : id(id){
 }
 
 //Constructeur par copie
-Robot::Robot(const Robot& robot) : id(robot.id){
+Robot::Robot(const Robot& robot) : id(robot.getId()){
     //compie la position en x et y du robot
     this->posX = robot.posX;
     this->posY = robot.posY;
@@ -78,7 +79,7 @@ Robot& Robot::operator= (const Robot& robot){
 }
 
 
-void Robot::deplacer(Terrain& terrain){
+void Robot::deplacer(Game game){
 
     /*
     direction = 1 → la tondeuse monte
@@ -114,10 +115,9 @@ void Robot::deplacer(Terrain& terrain){
                 return;
         }
         //check que le déplacement est dans les limites du terrain
-    }while(tmpPosX > 0 and tmpPosX < terrain.getLargeur() and tmpPosY > 0 and tmpPosY < terrain.getHauteur());
+    }while(tmpPosX > 0 and tmpPosX < game.getLargeur() and tmpPosY > 0 and tmpPosY < game.getHauteur());
 
-    //supprime le robot de son positionnement actuel.
-    terrain.clearPosition(this->posX, this->posY);
+
 
     //affecte la nouvelle position au robot
     this->posX = tmpPosX;
@@ -164,6 +164,16 @@ void detruireRobot(std::vector<Robot>& vRobots, Robot& robot, int id, Terrain& t
     }
 
 }
+
+Robot::Robot(int posX, int posY) : posX(posX), posY(posY)  { };
+
+bool Robot::operator() (int posX, int posY){
+    if(posX = this->posX and this->posY){
+        return true;
+    }
+    return false;
+}
+
 
 
 Robot::~Robot(){
