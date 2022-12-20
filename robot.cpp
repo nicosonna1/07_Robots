@@ -1,6 +1,15 @@
+//---------------------------------------------------------
 //
-// Created by nicolas-heig on 12/12/2022.
+// Fichier        : robot.cpp
+// Auteur(s)      : (C) Mariaux Ewan & Nicolas Sonnard
+// Date           : 2020-12-2022
+// But            :
 //
+// Modifications  :
+// Remarque(s)    : Le soft a pas été terminé il se compile pas
+//                  et il manque du code pour qu'il fonctionne
+//
+//---------------------------------------------------------
 
 #include <random>
 #include "robot.h"

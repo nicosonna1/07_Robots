@@ -1,12 +1,21 @@
-#include <cstdlib>   // EXIT_SUCCESS
-#include <vector>
-#include <algorithm>
+//---------------------------------------------------------
+//
+// Fichier        : main.cpp
+// Auteur(s)      : (C) Mariaux Ewan & Nicolas Sonnard
+// Date           : 2020-12-2022
+// But            :
+//
+// Modifications  :
+// Remarque(s)    : Le soft a pas été terminé il se compile pas
+//                  et il manque du code pour qu'il fonctionne
+//
+//---------------------------------------------------------
 
-#include "annex.h" //pour l'affichage
-#include "robot.h"
-#include "terrain.h"
+#include <cstdlib>   // EXIT_SUCCESS
+
+#include "annex.h"
 #include "game.h"
-#include <random>
+
 
 using namespace std;
 
@@ -27,19 +36,7 @@ int main() {
     int hauteur = saisie("hauteur",MIN_HAUTEUR, MAX_HAUTEUR);
     int nbreRobot = saisie("nbre object",MIN_ROBOTS, MAX_ROBOTS);
 
-    //création du terrain
-
-
-    //création d'un vecteur de robots
-   // vector<Robot> vRobots((size_t)nbreRobot, Robot(terrain));
-
-
-
-
-    //vector<Robot> vRobots;
-    //vRobots.resize(nbreRobot, Robot(terrain));
-
-
+    // appel de la classe game pour lancer la partie
     Game game(nbreRobot,largeur, hauteur);
 
 

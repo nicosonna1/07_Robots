@@ -1,11 +1,19 @@
+//---------------------------------------------------------
 //
-// Created by nicolas-heig on 12/12/2022.
+// Fichier        : robots.h
+// Auteur(s)      : (C) Mariaux Ewan & Nicolas Sonnard
+// Date           : 2020-12-2022
+// But            :
 //
+// Modifications  :
+// Remarque(s)    : Le soft a pas été terminé il se compile pas
+//                  et il manque du code pour qu'il fonctionne
+//
+//---------------------------------------------------------
 #ifndef INC_07_ROBOTS_ROBOT_H
 #define INC_07_ROBOTS_ROBOT_H
 
 #include <string>
-#include "terrain.h"
 #include <iostream>
 #include <vector>
 #include "game.h"

@@ -1,6 +1,15 @@
+//---------------------------------------------------------
 //
-// Created by nicolas-heig on 20/12/2022.
+// Fichier        : game.h
+// Auteur(s)      : (C) Mariaux Ewan & Nicolas Sonnard
+// Date           : 2020-12-2022
+// But            :
 //
+// Modifications  :
+// Remarque(s)    : Le soft a pas été terminé il se compile pas
+//                  et il manque du code pour qu'il fonctionne
+//
+//---------------------------------------------------------
 
 #ifndef INC_07_ROBOTS_GAME_H
 #define INC_07_ROBOTS_GAME_H
@@ -25,7 +34,7 @@ public:
 
 
 private:
-    void afficheTerrain() const;
+    static void afficheTerrain();
     int largeur,
         hauteur;
     std::vector<Robot> vRobots;

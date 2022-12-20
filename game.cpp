@@ -1,6 +1,16 @@
+//---------------------------------------------------------
 //
-// Created by nicolas-heig on 20/12/2022.
+// Fichier        : game.cpp
+// Auteur(s)      : (C) Mariaux Ewan & Nicolas Sonnard
+// Date           : 2020-12-2022
+// But            :
 //
+// Modifications  :
+// Remarque(s)    : Le soft a pas été terminé il se compile pas
+//                  et il manque du code pour qu'il fonctionne
+//
+//---------------------------------------------------------
+
 /**
  *
  *  nous garderons la classe robot. La classe terrain sera dégagée au profit de game qui regroupera l'ensemble
@@ -91,13 +101,21 @@ void Game::afficheTerrain() const{
     cout << string((size_t) this->largeur + 2, '-') << endl;
 }
 
-int Terrain::getLargeur() const {return this->largeur;}
+
+
+
+int Game::getLargeur() const {return this->largeur;}
 
 /**
  *  retourne la hauteur du terrain
  * @return hauteur du terrain
  */
-int Terrain::getHauteur() const {return this->hauteur;}
+int Game::getHauteur() const {return this->hauteur;}
+
+/**
+ * gere la partie
+ * @param game
+ */
 
 void jouer(Game game){
         // id du robot à supprimer
@@ -111,19 +129,20 @@ void jouer(Game game){
                 game.vRobots[i].deplacer();
 
                 //si l'emplacement n'est pas libre on détruit l'ancien robot
-                if(!(terrain.estLibre(game.vRobots[i].getPosX(), game.vRobots[i].getPosY())))
+                if(!find_if(vRobots.begin(), vRobots.end(),vRobots.id()))
                 {
+                    // TO DO
                     //le robot qui est déplacé n'est pas encore affiché
                     //c'est donc le robot qui était avant à cet emplacement qui est retourné
-                    id = terrain.getRobotId(game.vRobots[i].getPosX(), game.vRobots[i].getPosY());
+
                     //détruire le robot à la nouvelle position de vRobots[i]
-                    detruireRobot(game.vRobots, game.vRobots[i], id, game.terrain);
+
                 }
 
                 //affichage du robot à son nouvel emplacement
-                terrain.setPositionRobot((char)game.vRobots[i].getId(), game.vRobots[i].getPosX(), game.vRobots[i].getPosY());
+
             }
-            terrain.afficheTerrain();
+            Game::afficheTerrain();
             //on s'arrête dès qu'il reste 1 robot
         } while (game.vRobots.size() != 1);
 }

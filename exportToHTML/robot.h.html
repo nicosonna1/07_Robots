@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>robot.h</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #bbb529;}
+.s3 { color: #6a8759;}
+.s4 { color: #cc7832;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+robot.h</font>
+</center></td></tr></table>
+<pre><span class="s0">//</span>
+<span class="s0">// Created by nicolas-heig on 12/12/2022.</span>
+<span class="s0">//</span>
+<span class="s2">#ifndef </span><span class="s1">INC_07_ROBOTS_ROBOT_H</span>
+<span class="s2">#define </span><span class="s1">INC_07_ROBOTS_ROBOT_H</span>
+
+<span class="s2">#include </span><span class="s3">&lt;string&gt;</span>
+<span class="s2">#include </span><span class="s3">&quot;terrain.h&quot;</span>
+<span class="s2">#include </span><span class="s3">&lt;iostream&gt;</span>
+<span class="s2">#include </span><span class="s3">&lt;vector&gt;</span>
+<span class="s2">#include </span><span class="s3">&quot;game.h&quot;</span>
+
+<span class="s4">class </span><span class="s1">Robot{</span>
+<span class="s4">public</span><span class="s1">:</span>
+
+    <span class="s0">/** Fonction permettant d'afficher notre robot 
+     * __________________________________________________________ 
+     * @param os        : opérateur de flux 
+     * @param robot     : robot à afficher 
+     * __________________________________________________________ 
+     * @return          : retoune un flux d'affichage 
+     * @exception       : - 
+     */</span>
+    <span class="s4">friend </span><span class="s1">std::ostream&amp; </span><span class="s4">operator</span><span class="s1">&lt;&lt; (std::ostream&amp; os</span><span class="s4">, const </span><span class="s1">Robot&amp; robot)</span><span class="s4">;</span>
+
+    <span class="s0">/** Fonction permettant de détruie un Robot 
+     * __________________________________________________________ 
+     * @param vRobots   : vecteur contenant tous les robots 
+     * @param robot     : robot qui va tuer le robot au même emplacement 
+     * @param id        : id du robot à supprimer 
+     * @param terrain   : terrain pour l'affichage 
+     * __________________________________________________________ 
+     * @return          : - 
+     * @exception       : - 
+     */</span>
+    <span class="s4">friend void </span><span class="s1">detruireRobot(std::vector&lt;Robot&gt;&amp; vRobots</span><span class="s4">, </span><span class="s1">Robot&amp; robot</span><span class="s4">, int </span><span class="s1">id</span><span class="s4">, </span><span class="s1">Terrain&amp; terrain)</span><span class="s4">;</span>
+
+    <span class="s0">/** Constructeur par défaut de robot 
+     * __________________________________________________________ 
+     * @return          : - 
+     * @exception       : - 
+     */</span>
+    <span class="s1">Robot()</span><span class="s4">;</span>
+
+    <span class="s0">/** Constructeur de robot 
+     * __________________________________________________________ 
+     * @param terrain 
+     * __________________________________________________________ 
+     * @return          : - 
+     * @exception       : - 
+     */</span>
+    <span class="s1">Robot(Terrain&amp; terrain)</span><span class="s4">;</span>
+
+    <span class="s1">Robot(</span><span class="s4">int </span><span class="s1">id</span><span class="s4">, int </span><span class="s1">posX</span><span class="s4">, int </span><span class="s1">posY)</span><span class="s4">;</span>
+
+    <span class="s0">/**   Constructeur de copie 
+     * __________________________________________________________ 
+     * @param robot     : robot passé en copie 
+     * __________________________________________________________ 
+     * @return          : - 
+     * @exception       : - 
+     */</span>
+    <span class="s1">Robot(</span><span class="s4">const </span><span class="s1">Robot&amp; robot)</span><span class="s4">;</span>
+
+
+
+
+    <span class="s0">/**   Opérateur d'affectation 
+     * __________________________________________________________ 
+     * @param robot     : robot passé en paramètre pour l'affectation 
+     * __________________________________________________________ 
+     * @return          : retourne un robot en référence 
+     * @exception       : - 
+     */</span>
+    <span class="s1">Robot&amp; </span><span class="s4">operator</span><span class="s1">=(</span><span class="s4">const </span><span class="s1">Robot&amp; robot)</span><span class="s4">;</span>
+
+    <span class="s0">//void deplacement(Robot&amp; robot, Terrain&amp; terrain);</span>
+
+    <span class="s0">/** 
+     * 
+     * @param robot 
+     */</span>
+
+    <span class="s0">/**   Fonction afin de déplacer le robot 
+    * __________________________________________________________ 
+    * @param terrain        : terrain afin de pouvoir positioner le tableau dans ce dernier 
+    * __________________________________________________________ 
+    * @return               : - 
+     * @exception           : - 
+     */</span>
+    <span class="s4">void </span><span class="s1">deplacer(Game game)</span><span class="s4">;</span>
+
+
+    <span class="s0">/**   get l'id du robot 
+    * __________________________________________________________ 
+    * @return               : retourne l'id du robot 
+    * @exception           : - 
+    */</span>
+    <span class="s4">int </span><span class="s1">getId() </span><span class="s4">const;</span>
+
+
+    <span class="s0">/**   get la position en X du robot 
+    * __________________________________________________________ 
+    * @return               : retour de la position X 
+    * @exception           : - 
+    */</span>
+    <span class="s4">int </span><span class="s1">getPosX() </span><span class="s4">const;</span>
+
+
+    <span class="s0">/**   get la position en Y du robot 
+    * __________________________________________________________ 
+    * @return               : retour de la position Y 
+    * @exception           : - 
+    */</span>
+    <span class="s4">int </span><span class="s1">getPosY() </span><span class="s4">const;</span>
+
+
+    <span class="s0">/** 
+     *  Déconstructeur de la class Robot 
+     */</span>
+    <span class="s0">/**   Déconstructeur de la class Robot 
+    * __________________________________________________________ 
+    * @return               : - 
+    * @exception            : - 
+    */</span>
+    <span class="s1">~Robot()</span><span class="s4">;</span>
+
+    <span class="s1">Robot(</span><span class="s4">int </span><span class="s1">posX</span><span class="s4">, int </span><span class="s1">posY)</span><span class="s4">;</span>
+    <span class="s4">bool operator</span><span class="s1">() (</span><span class="s4">int </span><span class="s1">posX</span><span class="s4">, int </span><span class="s1">posY)</span>
+
+
+
+<span class="s4">private</span><span class="s1">:</span>
+    <span class="s0">//id du robot</span>
+    <span class="s4">const int </span><span class="s1">id</span><span class="s4">;</span>
+
+    <span class="s0">//Position en x en y du robot</span>
+    <span class="s4">int </span><span class="s1">posX</span><span class="s4">,</span>
+        <span class="s1">posY</span><span class="s4">;</span>
+
+    <span class="s0">//nombre de robot total.</span>
+    <span class="s4">static int </span><span class="s1">nbreRobots</span><span class="s4">;</span>
+    <span class="s0">//prochain Id pour un robot</span>
+    <span class="s4">static int </span><span class="s1">prochainId</span><span class="s4">;</span>
+<span class="s1">}</span><span class="s4">;</span>
+
+
+
+<span class="s2">#endif </span><span class="s0">//INC_07_ROBOTS_ROBOT_H</span>
+</pre>
+</body>
+</html>
