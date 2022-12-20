@@ -55,6 +55,7 @@ int main() {
             //affichage du robot à son nouvel emplacement
             terrain.setPositionRobot((char)vRobots[i].getId(), vRobots[i].getPosX(), vRobots[i].getPosY());
         }
+        terrain.afficheTerrain();
         //on s'arrête dès qu'il reste 1 robot
     } while (vRobots.size() != 1);
 

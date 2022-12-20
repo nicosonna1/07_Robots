@@ -13,6 +13,10 @@
 
 using namespace std;
 
+Terrain::Terrain(int largeur, int hauteur) {
+cout << "init du terrain" << endl;
+}
+
 /**
  *  Retourne la largeur du terrain
  * @return Largeur du terrain
@@ -82,6 +86,10 @@ void Terrain::afficheTerrain() const{
     }
     // Affiche bas du terrain
     cout << string((size_t) this->largeur + 2, '-') << endl;
+}
+
+void Terrain::historiqueMeurtre(int idRobotKill,int idRobotTueur){
+
 }
 
 
